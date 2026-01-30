@@ -1,32 +1,83 @@
-# 📚 TechGear Chatbot - Complete Documentation Index
+# 🤖 TechGear Chatbot - RAG-Powered AI Support System
 
-## 🎉 Welcome! Your Chatbot is LIVE!
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![FastAPI](https://img.shields.io/badge/fastapi-0.128.0-green.svg)](https://fastapi.tiangolo.com/)
+[![LangChain](https://img.shields.io/badge/langchain-1.2.7-orange.svg)](https://www.langchain.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**🌐 Open your browser and visit:** `http://localhost:8000/`
+A production-ready **Retrieval-Augmented Generation (RAG)** chatbot built with **LangChain**, **LangGraph**, **FastAPI**, and **Google Gemini**. This system demonstrates intelligent query routing, vector-based semantic search, and beautiful responsive UI design.
 
----
+## ✨ Features
 
-## 📖 Documentation Guide
+### 🎨 **Beautiful Professional UI**
+- Soothing teal/cyan color gradients
+- Real-time message display with smooth animations
+- Category badges (�️ Product, ↩️ Returns, 👨‍💼 Escalation)
+- Responsive design (mobile, tablet, desktop)
+- Loading animations
 
-### **Start Here** ⭐
+### 🧠 **Intelligent Query Routing**
+- **Classifier Node**: Gemini LLM classifies queries
+- **RAG Responder Node**: Retrieves from vector database
+- **Escalation Node**: Routes to human support
+- **Smart Conditional Routing**: Context-aware decisions
+
+### 📚 **RAG System with Vector Database**
+- **ChromaDB Integration**: Persistent vector embeddings
+- **Semantic Search**: Top-3 chunk retrieval
+- **Context-Aware Responses**: Gemini generates answers
+- **Graceful Degradation**: Handles unknown queries
+
+### 🚀 **Production-Ready API**
+- **FastAPI Server**: Modern async REST API
+- **Pydantic Validation**: Type-safe request/response
+- **CORS Middleware**: Cross-origin support
+- **Swagger Documentation**: Interactive API docs
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.10+
+- Google Gemini API key (free tier available)
+- Git
+
+### Installation
+
+```bash
+# Clone repository
+git clone https://github.com/yourusername/TECHGEAR-CHATBOT.git
+cd TECHGEAR-CHATBOT
+
+# Create virtual environment
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Set up environment
+cp .env.example .env
+# Edit .env with your Google API key
+
+# Initialize database
+python ingest.py
+
+# Start server
+export GOOGLE_API_KEY='your_key_here'
+uvicorn api:app --reload --host 0.0.0.0 --port 8000
+```
+
+**Open browser:** `http://localhost:8000/`
+
+## 📖 Documentation
+
+- **[START_HERE.md](START_HERE.md)** - Quick overview
 - **[QUICKSTART.md](QUICKSTART.md)** - 30-second setup guide
-  - How to use the chatbot
-  - Quick test cases
-  - Troubleshooting tips
-
-### **Learn the System**
-- **[COMPLETION_SUMMARY.md](COMPLETION_SUMMARY.md)** - Full overview
-  - What was built
-  - Key features
-  - Test results
-  - Tech stack
-
-### **Understand the Design**
-- **[ARCHITECTURE.md](ARCHITECTURE.md)** - System diagrams
-  - Complete data flow
-  - Query routing decision tree
-  - Technology stack diagram
-  - Message flow examples
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - System design & diagrams
+- **[VISUAL_GUIDE.md](VISUAL_GUIDE.md)** - UI showcase
+- **[SYSTEM_SUMMARY.md](SYSTEM_SUMMARY.md)** - Technical reference
+- **[TEST_GUIDE.md](TEST_GUIDE.md)** - Test cases & validation
+- **[COMPLETION_SUMMARY.md](COMPLETION_SUMMARY.md)** - Project overview
 
 ### **See the Beauty**
 - **[VISUAL_GUIDE.md](VISUAL_GUIDE.md)** - UI showcase
