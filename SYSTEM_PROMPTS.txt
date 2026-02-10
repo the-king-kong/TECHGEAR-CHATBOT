@@ -1,0 +1,171 @@
+================================================================================
+                    SYSTEM PROMPTS USED IN TECHGEAR CHATBOT
+================================================================================
+
+This document contains all the system prompts that were used to create and 
+operate the TechGear Chatbot repository. These prompts are crucial for the 
+chatbot's functionality and define how it processes and responds to queries.
+
+================================================================================
+1. CLASSIFICATION PROMPT (graph.py - classifier_node)
+================================================================================
+
+Location: graph.py, lines 91-104
+Purpose: Categorizes user queries into one of three types (product, returns, or general)
+
+PROMPT:
+-------
+Categorize this query into EXACTLY ONE of these categories:
+
+Categories:
+- "product": Questions about product prices, features, specifications
+- "returns": Questions about return policy, refunds, warranty
+- "general": Other questions or general inquiries
+
+Query: {query}
+
+Respond with ONLY the category name in quotes (e.g., "product" or "returns").
+Do not include any other text.
+
+INPUT VARIABLES: ["query"]
+
+================================================================================
+2. RAG CHAIN PROMPT (rag_chain.py - answer_query)
+================================================================================
+
+Location: rag_chain.py, lines 50-57
+Purpose: Guides the LLM to answer queries using only the provided context from the RAG system
+
+PROMPT:
+-------
+Answer ONLY using the provided context. If the answer is not in the context, say "I don't have this information."
+
+Context:
+{context}
+
+Question: {question}
+
+Answer:
+
+INPUT VARIABLES: ["context", "question"]
+
+================================================================================
+3. TEST SUITE PROMPT (test_rag_chain.py - test_prompt_template)
+================================================================================
+
+Location: test_rag_chain.py, lines 75-84
+Purpose: Same as RAG chain prompt, used for testing the prompt template functionality
+
+PROMPT:
+-------
+Answer ONLY using the provided context. If the answer is not in the context, say "I don't have this information."
+
+Context:
+{context}
+
+Question: {question}
+
+Answer:
+
+INPUT VARIABLES: ["context", "question"]
+
+================================================================================
+4. TEST SUITE PROMPT (test_all_components.py - test_prompt_template)
+================================================================================
+
+Location: test_all_components.py, lines 198-206
+Purpose: Same as RAG chain prompt, used for comprehensive component testing
+
+PROMPT:
+-------
+Answer ONLY using the provided context. If the answer is not in the context, say "I don't have this information."
+
+Context:
+{context}
+
+Question: {question}
+
+Answer:
+
+INPUT VARIABLES: ["context", "question"]
+
+================================================================================
+5. SIMPLIFIED TEST PROMPT (test_all_components.py - test_rag_chain_e2e)
+================================================================================
+
+Location: test_all_components.py, lines 302-303
+Purpose: Simplified prompt used for end-to-end RAG chain testing
+
+PROMPT:
+-------
+Answer: {context}
+
+Q: {question}
+
+A:
+
+INPUT VARIABLES: ["context", "question"]
+
+================================================================================
+PROMPT ENGINEERING PRINCIPLES USED
+================================================================================
+
+1. CLASSIFICATION PROMPT
+   - Clear categorization instructions
+   - Explicit output format requirement (quoted category name)
+   - No ambiguity in expected response
+   - Prevents LLM from adding extra commentary
+
+2. RAG CHAIN PROMPT
+   - Constrains LLM to use only provided context
+   - Explicit instruction for missing information
+   - Clear structure with labeled sections
+   - Prevents hallucination by limiting to context
+
+3. CONSISTENT STRUCTURE
+   - All prompts use clear section headers (Context, Question, Answer)
+   - Input variables are clearly defined
+   - Templates follow LangChain's PromptTemplate format
+
+================================================================================
+SYSTEM ARCHITECTURE CONTEXT
+================================================================================
+
+The prompts work together in the following workflow:
+
+1. User Query → API (api.py)
+   ↓
+2. LangGraph Workflow (graph.py)
+   ↓
+3. Classifier Node → CLASSIFICATION PROMPT
+   ↓
+4. Conditional Router (should_escalate)
+   ↓
+5a. RAG Responder Node → RAG CHAIN PROMPT
+   OR
+5b. Escalation Node → Predefined Message
+
+The system uses:
+- LLM: Google Gemini 2.0 Flash (gemini-2.0-flash)
+- Temperature: 0 (for deterministic outputs)
+- Vector Store: ChromaDB
+- Embeddings: Google Generative AI Embeddings (models/embedding-001)
+- Framework: LangChain + LangGraph
+
+================================================================================
+USAGE NOTES
+================================================================================
+
+1. All prompts are designed to work with Google's Gemini LLM
+2. Temperature is set to 0 for consistent, reproducible results
+3. Classification prompt uses strict formatting to ensure clean routing
+4. RAG prompt prevents hallucination by constraining to context
+5. All prompts use LangChain's PromptTemplate for structured input handling
+
+================================================================================
+END OF DOCUMENT
+================================================================================
+
+Generated: 2026-02-10
+Repository: the-king-kong/TECHGEAR-CHATBOT
+Purpose: Documentation of all system prompts used in chatbot creation
